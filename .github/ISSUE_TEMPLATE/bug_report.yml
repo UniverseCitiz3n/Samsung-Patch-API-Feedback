@@ -1,0 +1,56 @@
+name: "🐞 Bug Report"
+description: "Report an issue or unexpected behavior in the API."
+title: "[Bug] <Brief Issue Description>"
+labels: ["bug"]
+assignees: "UniverseCitiz3n"
+body:
+  - type: markdown
+    attributes:
+      value: "### 🐞 Bug Report\nPlease provide details about the issue."
+
+  - type: input
+    id: affected_endpoint
+    attributes:
+      label: "🔗 Affected Endpoint"
+      description: "Which API endpoint is affected? (e.g., `/get?model=SM-XXXX`)"
+      placeholder: "/get?model=SM-XXXX"
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: "📝 Issue Description"
+      description: "Describe the problem, including expected and actual behavior."
+      placeholder: "The API returns an incorrect response when I request..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: "📋 Steps to Reproduce"
+      description: "Provide the steps to replicate the issue."
+      placeholder: |
+        1. Call `/get?model=SM-XXXX`
+        2. Observe the response
+        3. Compare with expected output
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs_or_screenshots
+    attributes:
+      label: "📸 Logs & Screenshots (if applicable)"
+      description: "Paste relevant logs, errors, or screenshots to help diagnose the issue."
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: "✅ Confirmation"
+      description: "Please confirm the following:"
+      options:
+        - label: "I have checked that this bug has not been reported before."
+          required: true
+        - label: "I have provided all necessary details to reproduce the issue."
+          required: true
