@@ -1,20 +1,12 @@
----
-name: New model request
-about: Request for new model to be included in database
-title: "[NEW MODEL]"
-labels: new model
-assignees: ''
-
----
-
 name: "📱 New Model Request"
 description: "Request to add a new Samsung device model to the API."
 title: "[New Model] <Device Model Name>"
 labels: ["new model"]
+assignees: "UniverseCitiz3n"
 body:
   - type: markdown
     attributes:
-      value: "## 📌 New Model Request\nPlease provide the necessary details below to request a new Samsung model."
+      value: "### 📌 New Model Request\nPlease provide the necessary details below to request a new Samsung model."
 
   - type: input
     id: model_number
@@ -22,6 +14,8 @@ body:
       label: "📱 Model Number"
       description: "Enter the full model number (e.g., SM-G991B)."
       placeholder: "SM-XXXX"
+    validations:
+      required: true
 
   - type: input
     id: csc_code
@@ -29,6 +23,8 @@ body:
       label: "🌍 CSC Code"
       description: "Enter the country-specific code (e.g., EUX, XEO, DBT)."
       placeholder: "EUX"
+    validations:
+      required: true
 
   - type: checkboxes
     id: confirmation
