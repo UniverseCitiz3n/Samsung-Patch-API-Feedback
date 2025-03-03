@@ -1,0 +1,42 @@
+name: "🚀 Feature Request"
+description: "Suggest a new feature or improvement for the API."
+title: "[Feature] <Brief Description>"
+labels: ["enhancement"]
+assignees: ["UniverseCitiz3n"]
+body:
+  - type: markdown
+    attributes:
+      value: "### 🚀 Feature Request\nDescribe the feature or improvement you would like to see."
+
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: "💡 Feature Description"
+      description: "Provide a clear and concise description of what you want to happen."
+      placeholder: "I would like the API to support..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: "🔍 Use Case / Why is this needed?"
+      description: "Explain why this feature is useful and how it would benefit users."
+      placeholder: "This feature would help because..."
+
+  - type: textarea
+    id: potential_solution
+    attributes:
+      label: "🔧 Potential Solution (Optional)"
+      description: "Describe how this feature might be implemented or suggest an approach."
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: "✅ Confirmation"
+      description: "Please confirm the following:"
+      options:
+        - label: "I have checked that this feature has not been requested before."
+          required: true
+        - label: "I have provided enough context to understand the request."
+          required: true
