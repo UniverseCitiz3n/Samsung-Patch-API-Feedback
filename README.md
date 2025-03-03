@@ -13,7 +13,7 @@ Here, you can:
 ## 📝 How to Submit Feedback  
 
 ### 1️⃣ Request a New Model  
-📌 [Submit a Model Request](https://github.com/UniverseCitiz3n/Samsung-Patch-API-Feedback/issues/new?template=new-model-request.yml)  
+📌 [Submit a Model Request](https://github.com/UniverseCitiz3n/Samsung-Patch-API-Feedback/issues/new?template=new_model_request.yml)  
 
 ### 2️⃣ Report a Bug  
 🐞 [Submit a Bug Report](https://github.com/UniverseCitiz3n/Samsung-Patch-API-Feedback/issues/new?template=bug_report.yml)  
