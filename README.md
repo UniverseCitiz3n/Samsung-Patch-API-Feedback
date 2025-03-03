@@ -11,20 +11,15 @@ Here, you can:
 - **Suggest improvements** for the API 🚀  
 
 ## 📝 How to Submit Feedback  
-1. **Request a Model**  
-   - Open a [New Issue](https://github.com/your-username/Samsung-Patch-API-Feedback/issues/new)  
-   - Select the **"Model Request"** template  
-   - Provide details about the model (e.g., model number, CSC, and any additional information)  
 
-2. **Report a Bug or Issue**  
-   - Open a [New Issue](https://github.com/your-username/Samsung-Patch-API-Feedback/issues/new)  
-   - Select the **"Bug Report"** template  
-   - Describe the issue clearly and include steps to reproduce if possible  
+### 1️⃣ Request a New Model  
+📌 [Submit a Model Request](https://github.com/UniverseCitiz3n/Samsung-Patch-API-Feedback/issues/new?template=new_model_request.yml)  
 
-3. **Suggest an Improvement**  
-   - Open a [New Issue](https://github.com/your-username/Samsung-Patch-API-Feedback/issues/new)  
-   - Select the **"Feature Request"** template  
-   - Explain your idea and how it could enhance the API  
+### 2️⃣ Report a Bug  
+🐞 [Submit a Bug Report](https://github.com/UniverseCitiz3n/Samsung-Patch-API-Feedback/issues/new?template=bug_report.yml)  
+
+### 3️⃣ Suggest a Feature  
+🚀 [Submit a Feature Request](https://github.com/UniverseCitiz3n/Samsung-Patch-API-Feedback/issues/new?template=feature_request.yml)  
 
 ## 🚀 API Overview  
 The **Samsung Patch API** provides firmware update details for Samsung devices.  
