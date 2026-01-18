@@ -1,0 +1,105 @@
+name: Update Models Database
+
+on:
+  issues:
+    types: [closed]
+
+jobs:
+  update-models:
+    # Only run if the issue was closed as completed, has the correct title prefix, and has 'approved' label
+    if: |
+      github.event.issue.state_reason == 'completed' && 
+      startsWith(github.event.issue.title, '[New Model]') &&
+      contains(github.event.issue.labels.*.name, 'approved')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract model number from issue
+        id: extract
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueBody = context.payload.issue.body;
+            
+            // Parse the issue body to find the model number
+            // Format: ### 📱 Model Number\n\nSM-XXXX
+            const modelMatch = issueBody.match(/### 📱 Model Number\s*\n\n([A-Z]{2}-[A-Z0-9]+)/i);
+            
+            if (!modelMatch) {
+              core.setFailed('Could not extract model number from issue body');
+              return;
+            }
+            
+            const modelNumber = modelMatch[1].toUpperCase();
+            console.log(`Extracted model number: ${modelNumber}`);
+            core.setOutput('model', modelNumber);
+
+      - name: Update modelsDB.json
+        id: update
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'modelsDB.json';
+            
+            // Read current database
+            const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const model = '${{ steps.extract.outputs.model }}';
+            
+            // Check if model already exists
+            if (data.Model.includes(model)) {
+              console.log(`Model ${model} already exists in database`);
+              core.setOutput('added', 'false');
+              return;
+            }
+            
+            // Add new model
+            data.Model.push(model);
+            
+            // Sort the array alphabetically
+            data.Model.sort();
+            
+            // Write back to file
+            fs.writeFileSync(path, JSON.stringify(data, null, 4) + '\n');
+            
+            console.log(`Added model ${model} to database`);
+            core.setOutput('added', 'true');
+
+      - name: Commit and push changes
+        if: steps.update.outputs.added == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add modelsDB.json
+          git commit -m "Add model ${{ steps.extract.outputs.model }} [#${{ github.event.issue.number }}]"
+          git push
+
+      - name: Comment on issue
+        if: steps.update.outputs.added == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `✅ Model \`${{ steps.extract.outputs.model }}\` has been added to the database.`
+            });
+
+      - name: Comment if model already exists
+        if: steps.update.outputs.added == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `ℹ️ Model \`${{ steps.extract.outputs.model }}\` already exists in the database. No changes made.`
+            });
