@@ -6,11 +6,10 @@ on:
 
 jobs:
   update-models:
-    # Only run if the issue was closed as completed, has the correct title prefix, and has 'approved' label
     if: |
       github.event.issue.state_reason == 'completed' && 
-      startsWith(github.event.issue.title, '[New Model]') &&
-      contains(github.event.issue.labels.*.name, 'approved')
+      contains(github.event.issue.labels.*.name, 'approved') &&
+      contains(github.event.issue.labels.*.name, 'new model')
     runs-on: ubuntu-latest
     permissions:
       contents: write
